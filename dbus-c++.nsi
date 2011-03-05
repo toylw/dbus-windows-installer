@@ -4,6 +4,7 @@
 
 !include "Library.nsh"
 !include "ProcFunc.nsh"
+!include "EnvVarUpdate.nsh"
 
 Name "DBus C++ Installer"
 OutFile "DBus-C++-Installer.exe"
@@ -93,6 +94,10 @@ Section
     # NSIS 提供的 Library.nsh 的 Macro, 但目前沒有用到
     ;!insertmacro InstallLib DLL       NOTSHARED NOREBOOT_PROTECTED    ${TestDLL} $INSTDIR\test.dll $INSTDIR
     ;!insertmacro InstallLib REGEXE    $0        NOREBOOT_PROTECTED    ${TestEXE} $INSTDIR\test.exe $INSTDIR
+	
+	;設定環璄變數 PATH，在win7 HKLM會失敗，沒有辦法 append
+	${EnvVarUpdate} $0 "PATH" "A" "HKCU" "$INSTDIR\bin"
+	;${EnvVarUpdate} $0 "Path" "A" "HKLM" "$INSTDIR\bin"
 
     WriteUninstaller $INSTDIR\uninstall.exe
 SectionEnd
@@ -100,6 +105,11 @@ SectionEnd
 Section uninstall
     # RegDLL 沒有成功，但也不確定實際的功用為何
     ;UnRegDLL  "$INSTDIR\bin\libdbus-c++-1.dll"
+	
+	;設定環璄變數 PATH
+	${un.EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR\bin"
+	;${un.EnvVarUpdate} $0 "Path" "R" "HKLM" "$INSTDIR\bin"
+	
     ${TerminateProcess} "dbus-daemon.exe" $0
     Delete "$INSTDIR\*.*"
     RMDir /r "$INSTDIR"
