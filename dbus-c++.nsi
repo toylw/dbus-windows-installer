@@ -6,8 +6,8 @@
 !include "ProcFunc.nsh"
 !include "EnvVarUpdate.nsh"
 
-Name "DBus C++ Installer"
-OutFile "DBus-C++-Installer.exe"
+Name "DBus Windows Installer (unofficial)"
+OutFile "DBus-Windows-Installer.exe"
 
 # 定義相關的目錄路徑
 #!define KDEROOT "..\"
@@ -39,6 +39,8 @@ Section
     File "${SRC_IMG_DIR}\bin\libdbus-1.dll"
     File "${SRC_IMG_DIR}\bin\libdbus-c++-1.dll"
     File "${SRC_IMG_DIR}\bin\libexpat.dll"
+
+    SetOutPath "$INSTDIR\lib\"
     File "${SRC_IMG_DIR}\lib\libdbus-1.dll.a"
     File "${SRC_IMG_DIR}\lib\libdbus-c++-1.dll.a"
 
