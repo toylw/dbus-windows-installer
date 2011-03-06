@@ -4,13 +4,12 @@
 import sys
 import os
 import shutil
+import datetime
 
-# 重新編譯 libdbus
-os.system( "emerge --unmerge expat" );
-os.system( "emerge expat" );
-
-os.system( "emerge --unmerge libxml2" );
+# 編譯 dbus 的 dependencies
 os.system( "emerge libxml2" );
+os.system( "emerge pthread-win32" );
+os.system( "emerge expat" );
 
 # 重新編譯 libdbus
 os.system( "emerge --unmerge dbus-src" );
@@ -31,12 +30,15 @@ os.system( "MD "+dst )
 
 kderoot_build = os.path.join ( os.getenv('KDEROOT'), "build" )
 src_expat_dir = os.path.join( kderoot_build, "win32libs-bin\\expat-2.0.1\\image" )
+src_pthread_dir = os.path.join( kderoot_build, "testing\\pthreads-win32-2.7.0\\image" )
 #src_dbus_dir = os.path.join( kderoot_build, "win32libs-bin\\dbus-1.4.1-2\\image" )
 src_dbus_dir = os.path.join( kderoot_build, "win32libs-sources\\dbus-src-1.4.1-20110111\\image-mingw4-RelWithDebInfo-gitHEAD" )
 src_dbuscxx_dir = os.path.join( kderoot_build, "win32libs-sources\\dbus-c++-src-git\\image-mingw4-RelWithDebInfo-gitFOLLOW" )
 
 os.system( "XCOPY "+src_expat_dir + " " + dst + " /E/Y" )
+os.system( "XCOPY "+src_pthread_dir + " " + dst + " /E/Y" )
 os.system( "XCOPY "+src_dbus_dir + " " + dst + " /E/Y" )
 os.system( "XCOPY "+src_dbuscxx_dir + " " + dst + " /E/Y" )
 
-os.system( "makensis .\dbus-c++.nsi" );
+ver_num = datetime.datetime.utcnow().strftime("%Y%m%d-%H%M")
+os.system( "makensis -DVERSION_NUMBER="+ver_num+" .\dbus-c++.nsi" );
