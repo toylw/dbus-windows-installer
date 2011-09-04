@@ -72,14 +72,11 @@ int32_t EchoServer::Sum(const std::vector<int32_t>& ints)
 std::map< std::string, std::string > EchoServer::Info()
 {
 	std::map< std::string, std::string > info;
-#ifdef _WIN32
-	char *hostname=const_cast<char*>("localhost");
-#else
 	char hostname[HOST_NAME_MAX];
 
-	gethostname(hostname, sizeof(hostname));
-#endif
-	info["hostname"] = hostname;
+	//gethostname(hostname, sizeof(hostname));
+	//info["hostname"] = hostname;
+	info["hostname"] = "localhost";
 	info["username"] = getlogin();
 
 	return info;
