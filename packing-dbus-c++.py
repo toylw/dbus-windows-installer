@@ -21,11 +21,11 @@ os.system( "emerge expat" );
 
 # rebuild libdbus from git
 os.system( "emerge --unmerge dbus-src" );
-os.system( "emerge --target=%s dbus-src" % ( dbus_ver ) );
+os.system( "emerge --offline --target=%s dbus-src" % ( dbus_ver ) );
 
 # rebuild libdbus-c++
 os.system( "emerge --unmerge dbus-c++-src" );
-os.system( "emerge --target=%s dbus-c++-src" % ( dbuscxx_ver ) );
+os.system( "emerge --offline --target=%s dbus-c++-src" % ( dbuscxx_ver ) );
 
 # gather files into a directory
 dst = ".\\dbus-c++-inst"
