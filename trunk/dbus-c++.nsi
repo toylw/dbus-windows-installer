@@ -71,16 +71,22 @@ Section
     File "${SRC_IMG_DIR}\bin\libdbus-1.dll"
     File "${SRC_IMG_DIR}\bin\libdbus-c++-1.dll"
     File "${SRC_IMG_DIR}\bin\libexpat.dll"
-    File "${SRC_IMG_DIR}\bin\pthreadGC2.dll"
+    File "${SRC_IMG_DIR}\bin\libpthreads.dll"
 
     SetOutPath "$INSTDIR\lib\"
     File "${SRC_IMG_DIR}\lib\libdbus-1.dll.a"
     File "${SRC_IMG_DIR}\lib\libdbus-c++-1.dll.a"
+    File "${SRC_IMG_DIR}\lib\libpthreads.dll.a"
 
     # 設定安裝的目標目錄
     SetOutPath "$INSTDIR\etc\"
     File "${SRC_IMG_DIR}\etc\dbus-1\session.conf"
     File "${SRC_IMG_DIR}\etc\dbus-1\system.conf"
+
+    # 設定安裝的目標目錄
+    SetOutPath "$INSTDIR\include\"
+    File "${SRC_IMG_DIR}\include\pthread.h"
+    File "${SRC_IMG_DIR}\include\sched.h"
 
     # 設定安裝的目標目錄
     SetOutPath "$INSTDIR\include\dbus-c++\"
