@@ -10,10 +10,10 @@ ver_num = datetime.datetime.utcnow().strftime("%Y%m%d-%H%M")
 expat_ver    = "2.0.1"
 pthread_ver  = "2.8.0"
 #dbus_ver     = "gitHEAD"
-dbus_ver     = "1.4.14"
-dbus_src_ver = "1.4.10-20110302"
+dbus_ver     = "1.4.16"
+dbus_src_ver = "1.4.16-20110302"
 dbuscxx_ver  = "gitFOLLOW"
-dbuscxx_src_ver  = "git"
+dbuscxx_src_ver  = "all"
 
 # build dependencies of dbus
 os.system( "emerge --update libxml2" );
