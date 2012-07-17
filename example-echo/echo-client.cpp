@@ -68,21 +68,23 @@ int main()
 		client = new EchoClient(conn, ECHO_SERVER_PATH, ECHO_SERVER_NAME);
 	}
 
-	pthread_t thread_main;
-	pthread_create( &thread_main, NULL, dbus_thread, NULL);
+	for(int cnt=0; cnt<100; cnt++ ){
+		pthread_t thread_main;
+		pthread_create( &thread_main, NULL, dbus_thread, NULL);
 
-	pthread_t threads[THREADS];
+		pthread_t threads[THREADS];
 
-	for (int i = 0; i < THREADS; ++i)
-	{
-		pthread_create(threads+i, NULL, greeter_thread, &conn);
-	}
+		for (int i = 0; i < THREADS; ++i)
+		{
+			pthread_create(threads+i, NULL, greeter_thread, &conn);
+		}
 
-	cout << "terminating" << endl;
+		cout << "terminating" << endl;
 
-	for (int i = 0; i < THREADS; ++i)
-	{
-		pthread_join(threads[i], NULL);
+		for (int i = 0; i < THREADS; ++i)
+		{
+			pthread_join(threads[i], NULL);
+		}
 	}
 
 	cout << "====================All done=================" << endl;
