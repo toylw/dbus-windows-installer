@@ -1,0 +1,1 @@
+This project aims to provide a convenient installer for windows users to use/develope D-Bus related libraries and utilities. The installer currently contains D-Bus and D-Bus C++ libraries.
